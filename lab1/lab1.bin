@@ -1,0 +1,30 @@
+; Christian R. Garcia - CRG2965
+; 2/27/18
+; This program loads the starting address of a 3 letter word and decodes it by
+; adding -1 to the 1st letter, -2 to the 2nd, and -4 to the 4th.
+
+0011000000000000 ; .ORIG x3000
+
+; Loads the starting letter address to R0 and increments by 1 to get location 2
+; and 3 in R1 and R2.
+0010000000011111 ; LD    R0,   x001F
+0001001000100001 ; ADD   R1,   R0,     #1
+0001010000100010 ; ADD   R2,   R0,     #2
+
+; Loads the letter data from the 3 addresses.
+0110011000000000 ; LDR   R3,   R0,     #0
+0110100001000000 ; LDR   R4,   R1,     #0
+0110101010000000 ; LDR   R5,   R2,     #0
+
+; Decodes the letter data.
+0001011011111111 ; ADD   R3,   R3,     #-1
+0001100100111110 ; ADD   R4,   R4,     #-2
+0001101101111100 ; ADD   R5,   R5,     #-4
+
+; Stores the letter data in their original locations: R0, R1, R2.
+0111011000000000 ; STR   R3,   R0,     #0
+0111100001000000 ; STR   R4,   R1,     #0
+0111101010000000 ; STR   R5,   R2,     #0
+
+1111000000100101 ; TRAP x0025
+                 ; .END

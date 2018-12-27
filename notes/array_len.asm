@@ -1,4 +1,3 @@
-; Class 3/5 Work
 ; Getting length of an array that has it starting location in x3500
 
 ;	LD 	R0, PTR     	; R0 is the pointer to starting address of array
@@ -15,5 +14,3 @@ END 	LD 	R0, PTR
 	.HALT
 
 PTR 	.FILL 	x3500
-
-
